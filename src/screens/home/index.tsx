@@ -1,10 +1,14 @@
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { styles } from "./styles";
 
 export function Home() {
   return (
     <View style={styles.container}>
-      <Text>Link Start</Text>
+      <Image source={require('../../../assets/logo.png')} style={styles.logo} />
+
+      <View style={styles.tasks}>
+        
+      </View>
     </View>
   )
 }
