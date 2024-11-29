@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#0D0D0D',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   logo: {
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     borderRadius: 6,
   },
 
-  tasksList: {
+  tasksContainer: {
     gap: 20
   },
 
