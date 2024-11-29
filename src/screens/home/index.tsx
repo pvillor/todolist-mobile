@@ -17,6 +17,10 @@ export function Home() {
 
      setNewTaskTitle('')
   }
+  
+  function handleDeleteTask(taskId: number) {
+    setTasks(prevState => prevState.filter(task => task.id !== taskId))
+  }
 
   return (
     <View style={styles.container}>
@@ -52,7 +56,7 @@ export function Home() {
 
           <FlatList
             data={tasks}
-            renderItem={({ item }) => <Task title={item.title} isCompleted={item.isCompleted} />}
+            renderItem={({ item }) => <Task title={item.title} isCompleted={item.isCompleted} onDelete={() => handleDeleteTask(item.id)} />}
             keyExtractor={(_, index) => `task${index}`}
             showsVerticalScrollIndicator={false}
             style={{ marginBottom: 70 }}

@@ -5,9 +5,10 @@ import { styles } from "./styles";
 interface TaskProps {
   title: string
   isCompleted: boolean
+  onDelete: () => void
 }
 
-export function Task({ title, isCompleted }: TaskProps) {
+export function Task({ title, isCompleted, onDelete }: TaskProps) {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={{ padding: 8 }}>
@@ -22,7 +23,7 @@ export function Task({ title, isCompleted }: TaskProps) {
         {title}
       </Text>
 
-      <TouchableOpacity style={{ padding: 8 }}>
+      <TouchableOpacity style={{ padding: 8 }} onPress={onDelete}>
         <Feather name="trash" size={18} color="#808080" />
       </TouchableOpacity>
     </View>
