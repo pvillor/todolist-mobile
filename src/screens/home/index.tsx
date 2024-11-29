@@ -44,7 +44,7 @@ export function Home() {
     setTasks(prevState => prevState.filter(task => task.id !== taskId))
   }
 
-  function handleCompleteTask(taskId: number) {
+  function handleChangeTaskStatus(taskId: number) {
     const taskToComplete = tasks.find(task => task.id === taskId)
 
     if(!taskToComplete) {
@@ -52,9 +52,9 @@ export function Home() {
     }
     
     setTasks(prevState => [...prevState.filter(task => task.id !== taskId), {
-      id: taskToComplete?.id,
-      title: taskToComplete?.title,
-      isCompleted: true,
+      id: taskToComplete.id,
+      title: taskToComplete.title,
+      isCompleted: !taskToComplete.isCompleted,
     }])
   }
 
@@ -97,7 +97,7 @@ export function Home() {
                 title={item.title} 
                 isCompleted={item.isCompleted} 
                 onDelete={() => handleDeleteTask(item.id)} 
-                onComplete={() => handleCompleteTask(item.id)} 
+                onChangeStatus={() => handleChangeTaskStatus(item.id)} 
               />
             )}
             keyExtractor={(_, index) => `task${index}`}

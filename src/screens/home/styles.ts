@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
   form: {
     width: '100%',
     flexDirection: 'row',
+    alignItems: 'center',
     gap: 4,
     marginTop: -28,
   },

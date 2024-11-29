@@ -6,13 +6,13 @@ interface TaskProps {
   title: string
   isCompleted: boolean
   onDelete: () => void
-  onComplete: () => void
+  onChangeStatus: () => void
 }
 
-export function Task({ title, isCompleted, onDelete, onComplete }: TaskProps) {
+export function Task({ title, isCompleted, onDelete, onChangeStatus }: TaskProps) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={{ padding: 8 }} onPress={isCompleted ? undefined : onComplete}>
+      <TouchableOpacity style={{ padding: 8 }} onPress={onChangeStatus}>
         {isCompleted ? (
           <FontAwesome6 name="check" size={10} color="#fff" style={styles.completedIcon} />
         ) : (
