@@ -8,9 +8,23 @@ export function Home() {
   const [tasks, setTasks] = useState<{ id: number, title: string, isCompleted: boolean}[]>([])
   const [newTaskTitle, setNewTaskTitle] = useState('')
 
+  function findLastId() {
+    const { biggestId } = tasks.reduce((acc, task) => {
+      if(task.id > acc.biggestId) {
+        acc.biggestId = task.id
+      }
+
+      return acc
+    }, {
+      biggestId: 1
+    })
+
+    return biggestId
+  }
+
   function handleCreateTask(title: string) {
     setTasks(prevState => [{ 
-      id: tasks.length + 1,
+      id: findLastId() + 1,
       title,
       isCompleted: false
      }, ...prevState])
@@ -20,6 +34,20 @@ export function Home() {
   
   function handleDeleteTask(taskId: number) {
     setTasks(prevState => prevState.filter(task => task.id !== taskId))
+  }
+
+  function handleCompleteTask(taskId: number) {
+    const taskToComplete = tasks.find(task => task.id === taskId)
+
+    if(!taskToComplete) {
+      return null
+    }
+    
+    setTasks(prevState => [...prevState.filter(task => task.id !== taskId), {
+      id: taskToComplete?.id,
+      title: taskToComplete?.title,
+      isCompleted: true,
+    }])
   }
 
   return (
@@ -56,7 +84,14 @@ export function Home() {
 
           <FlatList
             data={tasks}
-            renderItem={({ item }) => <Task title={item.title} isCompleted={item.isCompleted} onDelete={() => handleDeleteTask(item.id)} />}
+            renderItem={({ item }) => (
+              <Task 
+                title={item.title} 
+                isCompleted={item.isCompleted} 
+                onDelete={() => handleDeleteTask(item.id)} 
+                onComplete={() => handleCompleteTask(item.id)} 
+              />
+            )}
             keyExtractor={(_, index) => `task${index}`}
             showsVerticalScrollIndicator={false}
             style={{ marginBottom: 70 }}
