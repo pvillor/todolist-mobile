@@ -32,7 +32,7 @@ export function Home() {
 
           <FlatList
             data={Array.from({ length: 12 })}
-            renderItem={() => <Task />}
+            renderItem={() => <Task title="Task" isCompleted={true} />}
             keyExtractor={(_, index) => `${index}`}
             showsVerticalScrollIndicator={false}
             style={{ marginBottom: 70 }}

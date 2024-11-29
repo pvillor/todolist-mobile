@@ -1,16 +1,25 @@
 import { Text, TouchableOpacity, View } from "react-native";
-import { Feather } from "@expo/vector-icons"
+import { Feather, FontAwesome6 } from "@expo/vector-icons"
 import { styles } from "./styles";
 
-export function Task() {
+interface TaskProps {
+  title: string
+  isCompleted: boolean
+}
+
+export function Task({ title, isCompleted }: TaskProps) {
   return (
     <View style={styles.container}>
       <TouchableOpacity>
-        <Feather name="circle" size={20} color="#4EA8DE" />
+        {isCompleted ? (
+          <FontAwesome6 name="check" size={10} color="#fff" style={styles.completedIcon} />
+        ) : (
+          <Feather name="circle" size={20} color="#4EA8DE" />
+        )}
       </TouchableOpacity>
 
-      <Text style={styles.taskName}>
-        Integer urna interdum massa libero auctor neque turpis turpis semper.
+      <Text style={isCompleted ? styles.completedTaskTitle : styles.taskTitle}>
+        {title}
       </Text>
 
       <TouchableOpacity>

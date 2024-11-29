@@ -16,10 +16,25 @@ export const styles = StyleSheet.create({
     marginBottom: 8
   },
 
-  taskName: {
+  taskTitle: {
     color: '#F2F2F2',
     fontWeight: '400',
     fontSize: 14,
     flex: 1
+  },
+
+  completedTaskTitle: {
+    color: '#808080',
+    fontWeight: '400',
+    fontSize: 14,
+    flex: 1,
+    textDecorationLine: 'line-through'
+  },
+
+  completedIcon: {
+    backgroundColor: '#5E60CE',
+    borderRadius: 9999,
+    paddingHorizontal: 4,
+    paddingVertical: 3
   }
 })
