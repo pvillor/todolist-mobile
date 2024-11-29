@@ -8,6 +8,14 @@ export function Home() {
   const [tasks, setTasks] = useState<{ id: number, title: string, isCompleted: boolean}[]>([])
   const [newTaskTitle, setNewTaskTitle] = useState('')
 
+  const completedTasksCount = tasks.reduce((acc, task) => {
+    if(task.isCompleted) {
+      acc++
+    }
+
+    return acc
+  }, 0)
+
   function findLastId() {
     const { biggestId } = tasks.reduce((acc, task) => {
       if(task.id > acc.biggestId) {
@@ -73,12 +81,12 @@ export function Home() {
           <View style={styles.tasksSummary}>
             <View style={styles.tasksSummaryDetails}>
               <Text style={styles.createdTasksSummaryText}>Criadas</Text>
-              <Text style={styles.tasksSummaryCount}>0</Text>
+              <Text style={styles.tasksSummaryCount}>{tasks.length}</Text>
             </View>
 
             <View style={styles.tasksSummaryDetails}>
               <Text style={styles.completedTasksSummaryText}>Concluídas</Text>
-              <Text style={styles.tasksSummaryCount}>0</Text>
+              <Text style={styles.tasksSummaryCount}>{completedTasksCount}</Text>
             </View>
           </View>
 
