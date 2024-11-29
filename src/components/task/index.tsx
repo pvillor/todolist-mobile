@@ -10,7 +10,7 @@ interface TaskProps {
 export function Task({ title, isCompleted }: TaskProps) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity style={{ padding: 8 }}>
         {isCompleted ? (
           <FontAwesome6 name="check" size={10} color="#fff" style={styles.completedIcon} />
         ) : (
@@ -22,7 +22,7 @@ export function Task({ title, isCompleted }: TaskProps) {
         {title}
       </Text>
 
-      <TouchableOpacity>
+      <TouchableOpacity style={{ padding: 8 }}>
         <Feather name="trash" size={18} color="#808080" />
       </TouchableOpacity>
     </View>

@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
   completedIcon: {
     backgroundColor: '#5E60CE',
     borderRadius: 9999,
-    paddingHorizontal: 4,
-    paddingVertical: 3
+    paddingHorizontal: 6,
+    paddingVertical: 5
   }
 })

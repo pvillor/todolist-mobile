@@ -2,17 +2,37 @@ import { FlatList, Image, Text, TextInput, TouchableOpacity, View } from "react-
 import { styles } from "./styles";
 import { Feather, FontAwesome5 } from "@expo/vector-icons"
 import { Task } from "../../components/task";
+import { useState } from "react";
 
 export function Home() {
+  const [tasks, setTasks] = useState<{ id: number, title: string, isCompleted: boolean}[]>([])
+  const [newTaskTitle, setNewTaskTitle] = useState('')
+
+  function handleCreateTask(title: string) {
+    setTasks(prevState => [{ 
+      id: tasks.length + 1,
+      title,
+      isCompleted: false
+     }, ...prevState])
+
+     setNewTaskTitle('')
+  }
+
   return (
     <View style={styles.container}>
       <Image source={require('../../../assets/logo.png')} style={styles.logo} />
 
       <View style={styles.tasks}>
         <View style={styles.form}>
-          <TextInput style={styles.input} placeholder="Adicione uma nova tarefa" placeholderTextColor="#808080" />
+          <TextInput 
+            style={styles.input} 
+            placeholder="Adicione uma nova tarefa" 
+            placeholderTextColor="#808080" 
+            value={newTaskTitle}
+            onChangeText={setNewTaskTitle}
+          />
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => handleCreateTask(newTaskTitle)}>
             <Feather name="plus-circle" color="#F2F2F2" size={16} />
           </TouchableOpacity>
         </View>
@@ -31,9 +51,9 @@ export function Home() {
           </View>
 
           <FlatList
-            data={Array.from({ length: 12 })}
-            renderItem={() => <Task title="Task" isCompleted={true} />}
-            keyExtractor={(_, index) => `${index}`}
+            data={tasks}
+            renderItem={({ item }) => <Task title={item.title} isCompleted={item.isCompleted} />}
+            keyExtractor={(_, index) => `task${index}`}
             showsVerticalScrollIndicator={false}
             style={{ marginBottom: 70 }}
             ListEmptyComponent={() => (
